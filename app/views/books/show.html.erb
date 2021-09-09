@@ -1,0 +1,8 @@
+<% @books.each do |book| %>
+<div>
+  <p><%= attachment_image_tag @user, :profile_image, :fill, 20, 20, fallback: "no_image.jpg"%></p>
+  <p><%= @user.name </p>
+  <p><<%= book.title %></p>
+  <p><%= book.body %></p>
+</div>
+<% end %>
