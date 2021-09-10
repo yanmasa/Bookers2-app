@@ -1,8 +1,29 @@
-<% @books.each do |book| %>
+<h1>User info</h1>
 <div>
-  <p><%= attachment_image_tag @user, :profile_image, :fill, 20, 20, fallback: "no_image.jpg"%></p>
-  <p><%= @user.name </p>
-  <p><<%= book.title %></p>
-  <p><%= book.body %></p>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+  <p>name</p>
+  <p><%= @user.name %></p>
+  <p>introduction</p>
+  <p><%= @user.introduction %></p>
+  
 </div>
+
+<h1>Book detail</h1>
+
+<div>
+  <p><%= attachment_image_tag @user_aot, :profile_image, :fill, 20, 20, fallback: "no_image.jpg"%></p>
+  <p><%= @user_aot.name  %></p>
+  <p><%= @book_aot.title %></p>
+  <p><%= @book_aot.body %></p>
+</div>
+
+
+
+<h1>New book</h1>
+<%= form_with model: @book, local:true do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit '投稿' %>
 <% end %>

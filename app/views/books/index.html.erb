@@ -5,15 +5,20 @@
   <p><%= @user.name %></p>
   <p>introduction</p>
   <p><%= @user.introduction %></p>
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% else %>
+    <p><%= link_to "プロフィール編集", books_path %></p>
+  <% end %>
 </div>
 
 <h1>Books</h1>
 <% @books.each do |book| %>
 <div>
   <p><%= attachment_image_tag User.find(book.user_id), :profile_image, :fill, 20, 20, fallback: "no_image.jpg"%></p>
-  <p>Title</p><%= link_to book.title , book_path(book.user.id) %>
-  
-  
+  <p>Title</p><%= link_to book.title , book_path(book.id) %>
+
+
   <p>Opinion</p><%= book.body %>
 </div>
 <% end %>
