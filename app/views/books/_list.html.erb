@@ -18,7 +18,7 @@
         <% if user.id == current_user.id %>
           <%= link_to "",edit_user_path(user), class:"btn btn-outline-secondary btn-block fas fa-user-cog edit_user_current_user.id" %>
         <% else %>
-          <%= link_to "",books_path, class:"btn btn-outline-secondary btn-block fas fa-user-cog edit_user_current_user.id" %>
+          <%= link_to "",user_path(current_user.id), class:"btn btn-outline-secondary btn-block fas fa-user-cog edit_user_current_user.id" %>
         <% end %>
       </div>
 
