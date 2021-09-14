@@ -5,30 +5,62 @@
       <h2>Book detail</h2>
       <table class="table table-hover table-inverse">
         <tbody>
-            <tr>
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+              <%= image_tag attachment_url(@user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"), size:'40x40' %><br>
+              <%= @user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to @book_aot.title, book_path(@book_aot.id) %>
+            </td>
+            <td>
+              <%= @book_aot.body %>
+            </td>
+            <% if @book_aot.favorited_by?(current_user) %>
               <td>
-                <%= link_to user_path(@user.id) do %>
-                <%= image_tag attachment_url(@user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"), size:'40x40' %><br>
-                <%= @user.name %>
+                <%= link_to book_favorites_path(@book_aot), method: :delete, class: 'good' do %>
+                  ♥<%= @book_aot.favorites.count %>
                 <% end %>
               </td>
+                <% else %>
               <td>
-                <%= link_to @book_aot.title, book_path(@book_aot.id) %>
-              </td>
-              <td>
-                <%= @book_aot.body %>
-              </td>
-                <% if @user.id == current_user.id %>
-                <td>
-                  <%= link_to "Edit", edit_book_path(@book_aot.id),class:"btn btn-sm btn-success" %>
-                </td>
-                <td>
-                  <%= link_to "Destroy", book_path(@book_aot.id), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-sm btn-danger" %>
-                </td>
+                <%= link_to book_favorites_path(@book_aot), method: :post, class: 'bad' do %>
+                  ♥<%= @book_aot.favorites.count %>
                 <% end %>
-            </tr>
+              </td>
+            <% end %>
+            <td>
+              <p>コメント数：<%= @book_aot.book_comments.count %></p>
+            </td>
+            <% if @user.id == current_user.id %>
+              <td>
+                <%= link_to "Edit", edit_book_path(@book_aot.id),class:"btn btn-sm btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Destroy", book_path(@book_aot.id), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-sm btn-danger" %>
+              </td>
+            <% end %>
+          </tr>
         </tbody>
       </table>
+      <% @book_aot.book_comments.each do |book_comment| %>
+        <div>
+          <span><%= image_tag attachment_url(book_comment.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"), size:'40x40' %></span>
+          <span><%= book_comment.comment %></span>
+          <% if book_comment.user == current_user %>
+            <span><%= link_to "Destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete %></span>
+          <% end %>
+        </div>
+      <% end %>
+      <div>
+        <p>コメント</p>
+        <%= form_with(model:[@book_aot, @book_comment], local: true) do |f| %>
+          <%= f.text_area :comment, rows:'5', cols:'100' %>
+          <%= f.submit "送信" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
