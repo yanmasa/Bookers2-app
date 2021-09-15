@@ -47,15 +47,29 @@
       </table>
       <% @book_aot.book_comments.each do |book_comment| %>
         <div>
-          <span><%= image_tag attachment_url(book_comment.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"), size:'40x40' %></span>
-          <span><%= book_comment.comment %></span>
-          <% if book_comment.user == current_user %>
-            <span><%= link_to "Destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete %></span>
-          <% end %>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to user_path(book_comment.user) do %>
+                    <%= image_tag attachment_url(book_comment.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"), size:'40x40' %><br>
+                    <%= book_comment.user.name %>
+                  <% end %>
+                </td>
+                <td>
+                  <span>　　</span><%= book_comment.comment %>
+                </td>
+                <td>
+                  <% if book_comment.user == current_user %>
+                    <span>　　</span><%= link_to "Destroy", book_book_comment_path(@book_aot, book_comment), method: :delete,class:"btn btn-sm btn-danger" %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       <% end %>
       <div>
-        <p>コメント</p>
         <%= form_with(model:[@book_aot, @book_comment], local: true) do |f| %>
           <%= f.text_area :comment, rows:'5', cols:'100' %>
           <%= f.submit "送信" %>
