@@ -17,31 +17,26 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
-  .notice{
-    color: green;
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
+.fa, .fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  line-height: normal;
+}
 
+.heart_red {
+  color: red ;
+}
 
+#notice {
+  color: green;
+}
 
-  #error_explanation{
-    color: red;
-  }
+#error_explanation {
+  color: red;
+}
 
-  .alert{
-    display:none;
-  }
-
-
- div.field, div.actions {
+div {
+  &.field, &.actions {
     margin-bottom: 10px;
   }
-
-  .heart_blue {
-    color: blue;
-  }
-
-  .heart_red {
-    color: red;
-  }
+}

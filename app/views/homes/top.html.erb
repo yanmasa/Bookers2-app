@@ -7,18 +7,10 @@
       <p> about various books!</p>
       <div class="btn-wrapper col-10 mx-auto">
         <div class="row">
-          <% if user_signed_in? %>
-            <%= link_to "Log in", user_path(current_user.id), class: "btn btn-info btn-lg btn-block mb-3" %>
-          <% else %>
-            <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-lg btn-block mb-3"  %>
-          <% end %>
+          <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3"  %>
         </div>
         <div class="row">
-          <% if user_signed_in? %>
-            <%= link_to "Sign Up", user_path(current_user.id), class: "btn btn-success btn-lg btn-block" %>
-          <% else %>
-            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success btn-lg btn-block" %>
-          <% end %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success btn-sm btn-block" %>
         </div>
       </div>
     </div>
