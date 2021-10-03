@@ -14,7 +14,10 @@ class User < ApplicationRecord
 
   has_many :relationships, foreign_key: "user_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :follow
-
+  
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  
   def follow(user_id)
     relationships.create(follow_id: user_id)
   end

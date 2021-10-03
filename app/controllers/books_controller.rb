@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.includes(:favorites).sort{|a,b| b.favorites.size <=> a.favorites.size}
     @book = Book.new
   end
 
