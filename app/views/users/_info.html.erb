@@ -32,7 +32,9 @@
 </div>
 <div class="row">
   <% unless current_user == user %>
+  <div class="btn-group">
     <%= render 'relationships/follow_button',user: user %>
     <%= render 'rooms/chat',isRoom: @isRoom,roomId: @roomId,room: @room, entry: @entry,user: user %>
+  </div>
   <% end %>
 </div>
